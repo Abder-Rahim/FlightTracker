@@ -1,0 +1,159 @@
+﻿@*
+    Date : 04/03/2019
+    Author : developpeur-csharp.com
+    Project : FlightTracker
+    Description : Show selected flight to the user and allowing him to modify
+*@
+
+@model FlightTracker.Models.Flight
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>Flight</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="FlightId" />
+            <div class="departure-airport">
+                <div class="form-group">
+                    <label asp-for="DepartureName" class="control-label"></label>
+                    <input asp-for="DepartureName" class="form-control" />
+                    <span asp-validation-for="DepartureName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DepartureLatitude" class="control-label"></label>
+                    <input asp-for="DepartureLatitude" class="form-control" />
+                    <span asp-validation-for="DepartureLatitude" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DepartureLongitude" class="control-label"></label>
+                    <input asp-for="DepartureLongitude" class="form-control" />
+                    <span asp-validation-for="DepartureLongitude" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="button" value="Washington" onclick="fill_departure_airport(0);" class="btn btn-default" />
+                    <input type="button" value="Cairo" onclick="fill_departure_airport(1);" class="btn btn-default" />
+                    <input type="button" value="Tokyo" onclick="fill_departure_airport(2);" class="btn btn-default" />
+                    <input type="button" value="Bamako" onclick="fill_departure_airport(3);" class="btn btn-default" />
+                </div>
+            </div>
+            <div id="airport1" class="destination-airport">
+                <div class="form-group">
+                    <label asp-for="DestinationName" class="control-label"></label>
+                    <input asp-for="DestinationName" class="form-control" />
+                    <span asp-validation-for="DestinationName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DestinationLatitude" class="control-label"></label>
+                    <input asp-for="DestinationLatitude" class="form-control" />
+                    <span asp-validation-for="DestinationLatitude" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DestinationLongitude" class="control-label"></label>
+                    <input asp-for="DestinationLongitude" class="form-control" />
+                    <span asp-validation-for="DestinationLongitude" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="button" value="Algier" onclick="fill_destination_airport(4);" class="btn btn-default" />
+                    <input type="button" value="Kabul" onclick="fill_destination_airport(5);" class="btn btn-default" />
+                    <input type="button" value="Vienna" onclick="fill_destination_airport(6);" class="btn btn-default" />
+                    <input type="button" value="Jamaica" onclick="fill_destination_airport(7);" class="btn btn-default" />
+                </div>
+            </div>
+            <div class="aircraft">
+                <label class="control-label">Airplane</label>
+                <div class="form-group">
+                    <input type="button" value="ATR 42" onclick="fill_aircraft_infos(0);" class="btn btn-default" />
+                    <input type="button" value="Antonov-158" onclick="fill_aircraft_infos(1);" class="btn btn-default" />
+                    <input type="button" value="Airbus A319" onclick="fill_aircraft_infos(2);" class="btn btn-default" />
+                    <input type="button" value="Airbus A320" onclick="fill_aircraft_infos(3);" class="btn btn-default" />
+                    <input type="button" value="Boeing 757" onclick="fill_aircraft_infos(4);" class="btn btn-default" />
+                    <input type="button" value="Boeing 737" onclick="fill_aircraft_infos(5);" class="btn btn-default" />
+                    <input type="button" value="Dornier 328" onclick="fill_aircraft_infos(6);" class="btn btn-default" />
+                    <input type="button" value="Pilatus PC" onclick="fill_aircraft_infos(7);" class="btn btn-default" />
+                    <input type="button" value="Saab 340" onclick="fill_aircraft_infos(8);" class="btn btn-default" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Speed" class="control-label"></label> <strong>( km/h )</strong>
+                <input asp-for="Speed" class="form-control" />
+                <span asp-validation-for="Speed" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FuelConsumption" class="control-label"></label> <strong>( kg/km )</strong>
+                <input asp-for="FuelConsumption" class="form-control" />
+                <span asp-validation-for="FuelConsumption" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TakeoffEffort" class="control-label"></label>
+                <input asp-for="TakeoffEffort" class="form-control" />
+                <span asp-validation-for="TakeoffEffort" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <script>
+        // table of airports (airport name, latitude, longitude)
+        var airports = [
+            ['Ronald Reagan Washington National Airport', '38.8521', '-77.037697'],
+            ['Cairo International Airport', '30.12190055847168', '31.40559959411621'],
+            ['Narita International Airport', '35.7647018433', '140.386001587'],
+            ['Senou Airport', '12.533499717712402', '-7.949940204620361'],
+            ['Houari Boumediene Airport', '36.691001892089844', '3.215409994125366'],
+            ['Kabul International Airport', '34.56589889526367', '69.2123031616211'],
+            ['Vienna International Airport', '48.110298156738', '16.569700241089'],
+            ['Ken Jones Airport', '18.1987991333', '-76.53450012210001']
+        ];
+
+        // table of aircrafts (model name, speed, consumption, takeoff effort)
+        var aircrafts = [
+            ['ATR 42', '500', '1.26', '1.001'],
+            ['Antonov-158', '800', '4.34', '1.002'],
+            ['Airbus A319', '833', '2.93', '1.003'],
+            ['Airbus A320', '833', '2.79', '1.004'],
+            ['Boeing 757', '854', '5.19', '1.005'],
+            ['Boeing 737', '796', '2.8', '1.006'],
+            ['Dornier 328', '620', '1.08', '1.007'],
+            ['Pilatus PC', '528', '0.41', '1.008'],
+            ['Saab 340', '467', '0.95', '1.009']
+        ];
+
+        // Fill the departure fields with the selected airport data
+        function fill_departure_airport(i) {
+            $('#DepartureName').val(airports[i][0]);
+            $('#DepartureLatitude').val(airports[i][1]);
+            $('#DepartureLongitude').val(airports[i][2]);
+        }
+
+        // Fill the destination fields with the selected airport data
+        function fill_destination_airport(i) {
+            $('#DestinationName').val(airports[i][0]);
+            $('#DestinationLatitude').val(airports[i][1]);
+            $('#DestinationLongitude').val(airports[i][2]);
+        }
+
+        // Fill the aircraft infos fields
+        function fill_aircraft_infos(i) {
+            $('#Speed').val(aircrafts[i][1]);
+            $('#FuelConsumption').val(aircrafts[i][2]);
+            $('#TakeoffEffort').val(aircrafts[i][3]);
+        }
+    </script>
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

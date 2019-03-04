@@ -1,0 +1,92 @@
+﻿@*
+    Date : 04/03/2019
+    Author : developpeur-csharp.com
+    Project : FlightTracker
+    Description : View the list of recent flights
+*@
+
+@model IEnumerable<FlightTracker.Models.Flight>
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<h2>Home</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DepartureName)
+            </th>
+            <th>
+                GPS position
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DestinationName)
+            </th>
+            <th>
+                GPS position
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FuelAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FuelConsumption)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FlightTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TakeoffEffort)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Distance)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DepartureName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DepartureLatitude) <br>
+                    @Html.DisplayFor(modelItem => item.DepartureLongitude)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DestinationName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DestinationLatitude) <br>
+                    @Html.DisplayFor(modelItem => item.DestinationLongitude)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FuelAmount) kg
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FuelConsumption) kg/km
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FlightTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TakeoffEffort)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Distance) Km
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.FlightId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.FlightId">Summary</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
