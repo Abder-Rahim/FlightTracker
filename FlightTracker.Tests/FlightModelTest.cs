@@ -14,6 +14,16 @@ namespace FlightTracker.Tests
     [TestClass]
     public class FlightModelTest
     {
+        #region Private Members
+        #endregion
+
+        #region Public Properties
+        #endregion
+
+        #region Constructors
+        #endregion
+
+        #region Public Methods
 
         [TestMethod]
         public void Add_writes_modify_in_database()
@@ -181,6 +191,6 @@ namespace FlightTracker.Tests
                 Assert.AreEqual(999 + id, flight.FuelAmount);
             }
         }
-
+        #endregion
     }
 }
