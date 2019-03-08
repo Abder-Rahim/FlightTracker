@@ -42,13 +42,13 @@ namespace FlightTracker.Tests
                 var flight = new Flight();
                 flight.FlightId = 999;
                 flight.DepartureName = "Ronald Reagan Washington National Airport";
-                flight.DepartureLatitude = "38.8521";
-                flight.DepartureLongitude = "-77.037697";
+                flight.DepartureLatitude = 38.8521d;
+                flight.DepartureLongitude = -77.037697d;
                 flight.DestinationName = "Ken Jones Airport";
-                flight.DestinationLatitude = "18.1987991333";
-                flight.DestinationLongitude = "-76.53450012210001";
-                flight.FuelConsumption = "1.26";
-                flight.TakeoffEffort = "1.001";
+                flight.DestinationLatitude = 18.1987991333d;
+                flight.DestinationLongitude = -76.53450012210001d;
+                flight.FuelConsumption = 1.26d;
+                flight.TakeoffEffort = 1.001d;
                 flight.Speed = 500;
                 var result = controller.Create(flight).Result as RedirectToActionResult;
 
@@ -85,13 +85,13 @@ namespace FlightTracker.Tests
 
                 // Modify input informations
                 flight.DepartureName = "Narita International Airport";
-                flight.DepartureLatitude = "35.7647018433";
-                flight.DepartureLongitude = "140.386001587";
+                flight.DepartureLatitude = 35.7647018433d;
+                flight.DepartureLongitude = 140.386001587d;
                 flight.DestinationName = "Kabul International Airport";
-                flight.DestinationLatitude = "34.56589889526367";
-                flight.DestinationLongitude = "69.2123031616211";
-                flight.FuelConsumption = "2.79";
-                flight.TakeoffEffort = "1.004";
+                flight.DestinationLatitude = 34.56589889526367d;
+                flight.DestinationLongitude = 69.2123031616211d;
+                flight.FuelConsumption = 2.79d;
+                flight.TakeoffEffort = 1.004d;
                 flight.Speed = 833;
 
                 // Save edit view
@@ -149,13 +149,13 @@ namespace FlightTracker.Tests
                 var flight = new Flight();
                 flight.FlightId = id;
                 flight.DepartureName = "Ronald Reagan Washington National Airport" + id;
-                flight.DepartureLatitude = "38.8521";
-                flight.DepartureLongitude = "-77.037697";
+                flight.DepartureLatitude = 38.8521d;
+                flight.DepartureLongitude = -77.037697d;
                 flight.DestinationName = "Ken Jones Airport" + id;
-                flight.DestinationLatitude = "18.1987991333";
-                flight.DestinationLongitude = "-76.53450012210001";
-                flight.FuelConsumption = "1.26";
-                flight.TakeoffEffort = "1.001";
+                flight.DestinationLatitude = 18.1987991333d;
+                flight.DestinationLongitude = -76.53450012210001d;
+                flight.FuelConsumption = 1.26d;
+                flight.TakeoffEffort = 1.001d;
                 flight.Speed = 500;
 
                 // Save the flight in the data base

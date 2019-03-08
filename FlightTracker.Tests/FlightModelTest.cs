@@ -38,18 +38,18 @@ namespace FlightTracker.Tests
                 // Create a new flight
                 var flight = new Flight();
                 flight.FlightId = 999;
-                flight.DepartureName = "DepartureName";
-                flight.DepartureLatitude = "DepartureLatitude";
-                flight.DepartureLongitude = "DepartureLongitude";
-                flight.DestinationName = "DestinationName";
-                flight.DestinationLatitude = "DestinationLatitude";
-                flight.DestinationLongitude = "DestinationLongitude";
+                flight.DepartureName = "Ronald Reagan Washington National Airport";
+                flight.DepartureLatitude = 38.8521d;
+                flight.DepartureLongitude = -77.037697d;
+                flight.DestinationName = "Ken Jones Airport";
+                flight.DestinationLatitude = 18.1987991333d;
+                flight.DestinationLongitude = -76.53450012210001d;
+                flight.FuelConsumption = 1.26d;
+                flight.TakeoffEffort = 1.001d;
+                flight.Speed = 500;
                 flight.FuelAmount = 999;
-                flight.FuelConsumption = "FuelConsumption";
                 flight.FlightTime = TimeSpan.FromMinutes(999);
-                flight.TakeoffEffort = "TakeoffEffort";
                 flight.Distance = 999;
-                flight.Speed = 999;
 
                 // Save the flight in the data base
                 context.Add(flight);
@@ -61,18 +61,18 @@ namespace FlightTracker.Tests
             {
                 Assert.AreEqual(1, context.Flights.Count());
                 Assert.AreEqual(999, context.Flights.Single().FlightId);
-                Assert.AreEqual("DepartureName", context.Flights.Single().DepartureName);
-                Assert.AreEqual("DepartureLatitude", context.Flights.Single().DepartureLatitude);
-                Assert.AreEqual("DepartureLongitude", context.Flights.Single().DepartureLongitude);
-                Assert.AreEqual("DestinationName", context.Flights.Single().DestinationName);
-                Assert.AreEqual("DestinationLatitude", context.Flights.Single().DestinationLatitude);
-                Assert.AreEqual("DestinationLongitude", context.Flights.Single().DestinationLongitude);
+                Assert.AreEqual("Ronald Reagan Washington National Airport", context.Flights.Single().DepartureName);
+                Assert.AreEqual(38.8521d, context.Flights.Single().DepartureLatitude);
+                Assert.AreEqual(-77.037697d, context.Flights.Single().DepartureLongitude);
+                Assert.AreEqual("Ken Jones Airport", context.Flights.Single().DestinationName);
+                Assert.AreEqual(18.1987991333d, context.Flights.Single().DestinationLatitude);
+                Assert.AreEqual(-76.53450012210001d, context.Flights.Single().DestinationLongitude);
+                Assert.AreEqual(1.26d, context.Flights.Single().FuelConsumption);
+                Assert.AreEqual(1.001d, context.Flights.Single().TakeoffEffort);
+                Assert.AreEqual(500, context.Flights.Single().Speed);
                 Assert.AreEqual(999, context.Flights.Single().FuelAmount);
-                Assert.AreEqual("FuelConsumption", context.Flights.Single().FuelConsumption);
                 Assert.AreEqual(TimeSpan.FromMinutes(999), context.Flights.Single().FlightTime);
-                Assert.AreEqual("TakeoffEffort", context.Flights.Single().TakeoffEffort);
                 Assert.AreEqual(999, context.Flights.Single().Distance);
-                Assert.AreEqual(999, context.Flights.Single().Speed);
             }
 
             // Modify some fields, unmodified fields must keep their old values
@@ -80,8 +80,8 @@ namespace FlightTracker.Tests
             {
                 var flight = context.Flights.Find(999);
                 Assert.AreNotEqual(null, flight);
-                flight.DepartureName = "DepartureName+";
-                flight.DestinationName = "DestinationName+";
+                flight.DepartureName = "+Ronald Reagan Washington National Airport+";
+                flight.DestinationName = "+Ken Jones Airport+";
                 flight.FuelAmount = 888;
 
                 // Save flight entity in database
@@ -95,18 +95,18 @@ namespace FlightTracker.Tests
             {
                 Assert.AreEqual(1, context.Flights.Count());
                 Assert.AreEqual(999, context.Flights.Single().FlightId);
-                Assert.AreEqual("DepartureName+", context.Flights.Single().DepartureName);
-                Assert.AreEqual("DepartureLatitude", context.Flights.Single().DepartureLatitude);
-                Assert.AreEqual("DepartureLongitude", context.Flights.Single().DepartureLongitude);
-                Assert.AreEqual("DestinationName+", context.Flights.Single().DestinationName);
-                Assert.AreEqual("DestinationLatitude", context.Flights.Single().DestinationLatitude);
-                Assert.AreEqual("DestinationLongitude", context.Flights.Single().DestinationLongitude);
+                Assert.AreEqual("+Ronald Reagan Washington National Airport+", context.Flights.Single().DepartureName);
+                Assert.AreEqual(38.8521d, context.Flights.Single().DepartureLatitude);
+                Assert.AreEqual(-77.037697d, context.Flights.Single().DepartureLongitude);
+                Assert.AreEqual("+Ken Jones Airport+", context.Flights.Single().DestinationName);
+                Assert.AreEqual(18.1987991333d, context.Flights.Single().DestinationLatitude);
+                Assert.AreEqual(-76.53450012210001d, context.Flights.Single().DestinationLongitude);
+                Assert.AreEqual(1.26d, context.Flights.Single().FuelConsumption);
+                Assert.AreEqual(1.001d, context.Flights.Single().TakeoffEffort);
+                Assert.AreEqual(500, context.Flights.Single().Speed);
                 Assert.AreEqual(888, context.Flights.Single().FuelAmount);
-                Assert.AreEqual("FuelConsumption", context.Flights.Single().FuelConsumption);
                 Assert.AreEqual(TimeSpan.FromMinutes(999), context.Flights.Single().FlightTime);
-                Assert.AreEqual("TakeoffEffort", context.Flights.Single().TakeoffEffort);
                 Assert.AreEqual(999, context.Flights.Single().Distance);
-                Assert.AreEqual(999, context.Flights.Single().Speed);
             }
         }
 
@@ -128,18 +128,18 @@ namespace FlightTracker.Tests
                 // Create a new flight
                 var flight = new Flight();
                 flight.FlightId = id;
-                flight.DepartureName = "DepartureName" + id;
-                flight.DepartureLatitude = "DepartureLatitude" + id;
-                flight.DepartureLongitude = "DepartureLongitude" + id;
-                flight.DestinationName = "DestinationName" + id;
-                flight.DestinationLatitude = "DestinationLatitude" + id;
-                flight.DestinationLongitude = "DestinationLongitude" + id;
+                flight.DepartureName = "Ronald Reagan Washington National Airport" + id;
+                flight.DepartureLatitude = 38.8521d + id;
+                flight.DepartureLongitude = -77.037697d + id;
+                flight.DestinationName = "Ken Jones Airport" + id;
+                flight.DestinationLatitude = 18.1987991333d + id;
+                flight.DestinationLongitude = -76.53450012210001d + id;
+                flight.FuelConsumption = 1.26d + id;
+                flight.TakeoffEffort = 1.001d + id;
+                flight.Speed = 500 + id;
                 flight.FuelAmount = 999 + id;
-                flight.FuelConsumption = "FuelConsumption" + id;
                 flight.FlightTime = TimeSpan.FromMinutes(999 + id);
-                flight.TakeoffEffort = "TakeoffEffort" + id;
                 flight.Distance = 999 + id;
-                flight.Speed = 999 + id;
 
                 // Save the flight in the data base
                 context.Add(flight);
@@ -160,8 +160,8 @@ namespace FlightTracker.Tests
                 Assert.AreEqual(5, context.Flights.Count());
                 foreach (Flight flight in context.Flights)
                 {
-                    Assert.AreEqual("DepartureName" + flight.FlightId, flight.DepartureName);
-                    Assert.AreEqual("DestinationName" + flight.FlightId, flight.DestinationName);
+                    Assert.AreEqual("Ronald Reagan Washington National Airport" + flight.FlightId, flight.DepartureName);
+                    Assert.AreEqual("Ken Jones Airport" + flight.FlightId, flight.DestinationName);
                     Assert.AreEqual(999 + flight.FlightId, flight.FuelAmount);
                 }
             }
@@ -186,8 +186,8 @@ namespace FlightTracker.Tests
                 var flight = context.Flights.Find(id);
                 Assert.AreNotEqual(null, flight);
                 Assert.AreEqual(id, flight.FlightId);
-                Assert.AreEqual("DepartureName" + id, flight.DepartureName);
-                Assert.AreEqual("DestinationName" + id, flight.DestinationName);
+                Assert.AreEqual("Ronald Reagan Washington National Airport" + id, flight.DepartureName);
+                Assert.AreEqual("Ken Jones Airport" + id, flight.DestinationName);
                 Assert.AreEqual(999 + id, flight.FuelAmount);
             }
         }

@@ -93,28 +93,35 @@ namespace FlightTracker.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Calculate the distance from the departure airport to the arrival airport
-                double lat = Convert.ToDouble(flight.DepartureLatitude.Replace(".", ","));
-                double lon = Convert.ToDouble(flight.DepartureLongitude.Replace(".", ","));
-                var sCoord = new GeoCoordinate(lat, lon);
-                lat = Convert.ToDouble(flight.DestinationLatitude.Replace(".", ","));
-                lon = Convert.ToDouble(flight.DestinationLongitude.Replace(".", ","));
-                var eCoord = new GeoCoordinate(lat, lon);
-                double distance = sCoord.GetDistanceTo(eCoord) / 1000;
-                flight.Distance = (int)distance;
+                try
+                {
+                    // Calculate the distance from the departure airport to the arrival airport
+                    double lat = flight.DepartureLatitude;
+                    double lon = flight.DepartureLongitude;
+                    var sCoord = new GeoCoordinate(lat, lon);
+                    lat = flight.DestinationLatitude;
+                    lon = flight.DestinationLongitude;
+                    var eCoord = new GeoCoordinate(lat, lon);
+                    double distance = sCoord.GetDistanceTo(eCoord) / 1000;
+                    flight.Distance = (int)distance;
 
-                double consumption = Convert.ToDouble(flight.FuelConsumption.Replace(".", ","));
-                double takeoffEffort = Convert.ToDouble(flight.TakeoffEffort.Replace(".", ","));
+                    double consumption = flight.FuelConsumption;
+                    double takeoffEffort = flight.TakeoffEffort;
 
-                // Calculate flight time and fuel amount
-                flight.FuelAmount = (int)(consumption * distance + takeoffEffort);
-                flight.FlightTime = TimeSpan.FromMinutes(Math.Round((distance / flight.Speed) * 60));
+                    // Calculate flight time and fuel amount
+                    flight.FuelAmount = (int)(consumption * distance + takeoffEffort);
+                    flight.FlightTime = TimeSpan.FromMinutes(Math.Round((distance / flight.Speed) * 60));
 
-                // Save flight entity in database
-                _context.Add(flight);
-                await _context.SaveChangesAsync();
+                    // Save flight entity in database
+                    _context.Add(flight);
+                    await _context.SaveChangesAsync();
 
-                return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(Index));
+                }
+                catch
+                {
+                    return View("Create", flight);
+                }
             }
             return View("Create", flight);
         }
@@ -160,17 +167,17 @@ namespace FlightTracker.Controllers
                 {
 
                     // Calculate the distance from the departure airport to the arrival airport
-                    double lat = Convert.ToDouble(flight.DepartureLatitude.Replace(".", ","));
-                    double lon = Convert.ToDouble(flight.DepartureLongitude.Replace(".", ","));
+                    double lat = flight.DepartureLatitude; 
+                    double lon = flight.DepartureLongitude; 
                     var sCoord = new GeoCoordinate(lat, lon);
-                    lat = Convert.ToDouble(flight.DestinationLatitude.Replace(".", ","));
-                    lon = Convert.ToDouble(flight.DestinationLongitude.Replace(".", ","));
+                    lat = flight.DestinationLatitude; 
+                    lon = flight.DestinationLongitude; 
                     var eCoord = new GeoCoordinate(lat, lon);
                     double distance = sCoord.GetDistanceTo(eCoord) / 1000;
                     flight.Distance = (int)distance;
 
-                    double consumption = Convert.ToDouble(flight.FuelConsumption.Replace(".", ","));
-                    double takeoffEffort = Convert.ToDouble(flight.TakeoffEffort.Replace(".", ","));
+                    double consumption = flight.FuelConsumption; 
+                    double takeoffEffort = flight.TakeoffEffort; 
 
                     // Calculate flight time and fuel amount
                     flight.FuelAmount = (int)(consumption * distance + takeoffEffort);
