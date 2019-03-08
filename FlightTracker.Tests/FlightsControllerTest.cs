@@ -71,6 +71,7 @@ namespace FlightTracker.Tests
                 Assert.AreEqual(flight.FuelAmount, 2897);
                 Assert.AreEqual(flight.FlightTime, TimeSpan.FromMinutes(4 * 60 + 36));
                 Assert.AreEqual(flight.Distance, 2299);
+                Assert.AreEqual("Details", result.ViewName);
             }
 
             // Run the test against one instance of the context
@@ -80,6 +81,7 @@ namespace FlightTracker.Tests
                 var controller = new FlightsController(context);
                 var result = controller.Edit(999).Result as ViewResult;
                 var flight = (Flight)result.ViewData.Model;
+                Assert.AreEqual("Edit", result.ViewName);
 
                 // Modify input informations
                 flight.DepartureName = "Narita International Airport";
@@ -160,6 +162,7 @@ namespace FlightTracker.Tests
                 var controller = new FlightsController(context);
                 var result = controller.Create(flight).Result as RedirectToActionResult;
                 Assert.IsNotNull(result, $"Flight {id} was not created");
+                Assert.AreEqual("Index", result.ActionName);
             }
         }
 
@@ -174,7 +177,9 @@ namespace FlightTracker.Tests
             {
                 var controller = new FlightsController(context);
                 var result = controller.Index().Result as ViewResult;
+            
                 var flights = (IEnumerable<Flight>) result.ViewData.Model;
+                Assert.AreEqual("Index", result.ViewName);
                 Assert.AreEqual(24, flights.Count());
                 foreach (Flight flight in flights)
                 {
@@ -203,6 +208,7 @@ namespace FlightTracker.Tests
                 var result = controller.Details(id).Result as ViewResult;
                 var flight = (Flight)result.ViewData.Model;
 
+                Assert.AreEqual("Details", result.ViewName);
                 Assert.AreNotEqual(null, flight);
                 Assert.AreEqual(id, flight.FlightId);
                 Assert.AreEqual(flight.DepartureName, "Ronald Reagan Washington National Airport24");
@@ -212,6 +218,7 @@ namespace FlightTracker.Tests
                 Assert.AreEqual(flight.Distance, 2299);
             }
         }
+
         #endregion
     }
 }

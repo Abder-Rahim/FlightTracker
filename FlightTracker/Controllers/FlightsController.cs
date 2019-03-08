@@ -48,7 +48,7 @@ namespace FlightTracker.Controllers
         /// <returns>Return the list of all flights</returns>
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Flights.ToListAsync());
+            return View("Index", await _context.Flights.ToListAsync());
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace FlightTracker.Controllers
                 return NotFound();
             }
 
-            return View(flight);
+            return View("Details", flight);
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace FlightTracker.Controllers
         /// <returns>Returns a form allowing the user to create a flight</returns>
         public IActionResult Create()
         {
-            return View();
+            return View("Create");
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace FlightTracker.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
-            return View(flight);
+            return View("Create", flight);
         }
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace FlightTracker.Controllers
             {
                 return NotFound();
             }
-            return View(flight);
+            return View("Edit", flight);
         }
 
         /// <summary>
@@ -193,7 +193,7 @@ namespace FlightTracker.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(flight);
+            return View("Edit", flight);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
